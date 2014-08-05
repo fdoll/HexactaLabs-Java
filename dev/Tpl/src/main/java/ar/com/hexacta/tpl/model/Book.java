@@ -13,18 +13,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "BOOKS")
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 604529088687479075L;
 
     @Id
+    @Column(name = "BOOK_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Version
+    @Column(name = "VERSION")
     private Long version;
 
     @Column(name = "NAME")
@@ -51,6 +55,12 @@ public class Book implements Serializable {
     @Column(name = "BOOK_COMMENT")
     private List<Comment> bookComments;
 
+    /*
+     * <list name="bookComments" table="COMENTARIOS"
+     * cascade="all-delete-orphan"> <key column="BOOK_ID" /> <one-to-many
+     * column="COMMENT_ID" class="ar.com.hexacta.tpl.model.Comment" /> </list>
+     */
+
     // Hibernate needs
     public Book() {
         super();
@@ -61,12 +71,13 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public Book(final String aName, final String aDescription, final String aPublisher,
+    public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry,
             final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final List<Comment> bookComments) {
         super();
         name = aName;
         description = aDescription;
         publisher = aPublisher;
+        country = aCountry;
         this.bookCategories = bookCategories;
         this.bookCopies = bookCopies;
         this.bookComments = bookComments;
@@ -135,6 +146,10 @@ public class Book implements Serializable {
 
     public void setId(final Long id) {
         this.id = id;
+    }
+
+    public void setVersion(final Long version) {
+        this.version = version;
     }
 
     public Long getVersion() {

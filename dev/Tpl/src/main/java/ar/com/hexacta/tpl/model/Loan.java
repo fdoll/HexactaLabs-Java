@@ -13,31 +13,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "LOANS")
 public class Loan implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "LOAN_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Version
-    private Long version;
-
-    @Column(name = "USER")
+    /*
+     * @Version
+     * 
+     * @Column(name = "VERSION") private Long version;
+     */
+    // @Column(name = "USER")
     private String user;
 
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-    @Column(name = "BOOK")
+    // @Column(name = "BOOK")
     private BookCopy book;
 
-    @Column(name = "FROM_DATE")
+    // @Column(name = "FROM_DATE", length=4)
     private Date fromDate;
 
-    @Column(name = "TO_DATE")
+    // @Column(name = "TO_DATE", length=4)
     private Date toDate;
 
     protected Loan() {
@@ -75,12 +79,9 @@ public class Loan implements Serializable {
     public void setId(final Long id) {
         this.id = id;
     }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(final Long version) {
-        this.version = version;
-    }
+    /*
+     * public Long getVersion() { return version; }
+     * 
+     * public void setVersion(final Long version) { this.version = version; }
+     */
 }
