@@ -17,15 +17,13 @@ public class BookCategory implements Serializable {
     private static final long serialVersionUID = -8084614446913836469L;
 
     @Id
-    @Column(name = "BOOK_CATEGORY_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Version
-    @Column(name = "VERSION")
     private Long version;
 
-    @Column(name = "NAME", unique = true, nullable = false)
+    @Column(name = "NAME")
     private String name;
 
     @Column(name = "DESCRIPTION")
@@ -73,4 +71,5 @@ public class BookCategory implements Serializable {
     public void setVersion(final Long version) {
         this.version = version;
     }
+
 }

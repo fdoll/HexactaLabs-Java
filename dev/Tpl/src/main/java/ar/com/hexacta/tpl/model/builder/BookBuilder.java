@@ -1,8 +1,6 @@
 package ar.com.hexacta.tpl.model.builder;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import ar.com.hexacta.tpl.model.Book;
@@ -24,7 +22,7 @@ public class BookBuilder {
 
     private Set<BookCopy> bookCopies = new HashSet<BookCopy>(0);
 
-    private List<Comment> bookComments = new ArrayList<Comment>(0);
+    private Set<Comment> bookComments = new HashSet<Comment>(0);
 
     public Book build() {
         return new Book(name, description, publisher, country, bookCategories, bookCopies, bookComments);

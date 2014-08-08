@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "COMMENTS")
@@ -23,18 +24,17 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /*
-     * @Version
-     * 
-     * @Column(name = "VERSION") private Long version;
-     */
-    // @Column(name = "BOOK")
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
+
+    @Column(name = "BOOK")
     private String book;
 
-    // @Column(name = "USER")
+    @Column(name = "USER")
     private String user;
 
-    // @Column(name = "BODY")
+    @Column(name = "BODY")
     private String body;
 
     // Hibernate needs
@@ -80,9 +80,13 @@ public class Comment implements Serializable {
     public void setId(final Long id) {
         this.id = id;
     }
-    /*
-     * public Long getVersion() { return version; }
-     * 
-     * public void setVersion(final Long version) { this.version = version; }
-     */
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(final Long version) {
+        this.version = version;
+    }
+
 }

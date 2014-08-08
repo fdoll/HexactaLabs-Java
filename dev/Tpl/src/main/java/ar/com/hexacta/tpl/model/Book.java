@@ -1,7 +1,6 @@
 package ar.com.hexacta.tpl.model;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,11 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "BOOKS")
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 604529088687479075L;
@@ -53,15 +50,15 @@ public class Book implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(name = "BOOK_COMMENT")
-    private List<Comment> bookComments;
+    private Set<Comment> bookComments;
 
     /*
      * <list name="bookComments" table="COMENTARIOS"
      * cascade="all-delete-orphan"> <key column="BOOK_ID" /> <one-to-many
      * column="COMMENT_ID" class="ar.com.hexacta.tpl.model.Comment" /> </list>
      */
+    // Hibernate needs this
 
-    // Hibernate needs
     public Book() {
         super();
     }
@@ -72,7 +69,9 @@ public class Book implements Serializable {
     }
 
     public Book(final String aName, final String aDescription, final String aPublisher, final String aCountry,
-            final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final List<Comment> bookComments) {
+
+    final Set<BookCategory> bookCategories, final Set<BookCopy> bookCopies, final Set<Comment> bookComments) {
+
         super();
         name = aName;
         description = aDescription;
@@ -132,12 +131,17 @@ public class Book implements Serializable {
         this.country = country;
     }
 
-    public List<Comment> getBookComments() {
+    public Set<Comment> getBookComments() {
         return bookComments;
     }
 
-    public void setBookComments(final List<Comment> bookComments) {
+    public void setBookComments(final Set<Comment> bookComments) {
         this.bookComments = bookComments;
+    }
+
+    public void addBookComment(final Comment aComment) {
+        aComment.setBook(name);
+        bookComments.add(aComment);
     }
 
     public Long getId() {
@@ -148,11 +152,12 @@ public class Book implements Serializable {
         this.id = id;
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
     public void setVersion(final Long version) {
         this.version = version;
     }
 
-    public Long getVersion() {
-        return version;
-    }
 }

@@ -16,13 +16,12 @@ import javax.persistence.Version;
 @Entity
 @Table(name = "BOOK_COPIES")
 public class BookCopy implements Serializable {
+
     @Id
-    @Column(name = "BOOK_COPY_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Version
-    @Column(name = "VERSION")
     private Long version;
 
     public static final String BOOK_RATE_BAD = "Bad";
@@ -39,10 +38,10 @@ public class BookCopy implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "CODE", unique = true, nullable = false)
+    @Column(name = "CODE")
     private String code = "";
 
-    @Column(name = "BOOK_RATE")
+    @Column(name = "BOOK_RATE", unique = true, nullable = false)
     private String bookRate;
 
     @Column(name = "STATE")
@@ -94,4 +93,5 @@ public class BookCopy implements Serializable {
     public void setVersion(final Long version) {
         this.version = version;
     }
+
 }
