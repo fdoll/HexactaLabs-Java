@@ -1,3 +1,4 @@
+
 booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 		$http) {
 	$scope.newBook = {};
@@ -7,7 +8,6 @@ booksApp.controller('createBookCtrl', function($scope, $location, $rootScope,
 				function(data, status, headers, config) {
 					if (status = 200) {
 						// Ok message and go back
-						// alert('ok');
 						console.log("Creation Completed.\nBook's Country: "
 								+ $scope.newBook.country);
 						$location.path("/");
